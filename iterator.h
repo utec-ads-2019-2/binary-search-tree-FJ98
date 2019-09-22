@@ -2,40 +2,81 @@
 #define ITERATOR_H
 
 #include "node.h"
-
-template <typename T> 
+#include <stack>
+#include <queue>
+#include <deque>
+template <typename T>
 class Iterator {
     private:
-        Node<T> *current;
-
+    Node<T> *current;
+    stack<Node<T>*> descendingOrder;
+    stack<Node<T>*> ascendingOrder;
+    deque<Node<T>*> inOrder;
     public:
-        Iterator() {
-            // TODO
+    Iterator() { this->current = nullptr; }
+
+    void nextInOrder(Node<T> *node){
+        // LIKE traverseInOrder, same idea.
+        if (!node) return;
+        nextInOrder(node->left);
+        descendingOrder.push(node);
+        nextInOrder(node->right);
+    }
+
+
+    explicit Iterator(Node<T> *node) {
+        nextInOrder(node);
+        // Using another stack to set the initial position of begin() iterator
+        while ( !descendingOrder.empty() )
+        {
+            ascendingOrder.push(descendingOrder.top() );
+            descendingOrder.pop();
+        }
+        descendingOrder.push(ascendingOrder.top() );
+        ascendingOrder.pop();
+
+        this->current = descendingOrder.top(); //setting the initial position of begin() iterator
+    }
+
+    Iterator<T>& operator=(const Iterator<T> &other) {
+        this->current = other->current;
+        return (*this);
+    }
+
+    bool operator!=(Iterator<T> other) {
+        return this->current != other.current;
+    }
+
+    Iterator<T> operator++() {
+        if ( ascendingOrder.empty() )
+        {
+            this->current = nullptr;
+            return (*this);
         }
 
-        Iterator(Node<T> *node) {
-            // TODO
-        }
+        descendingOrder.push(ascendingOrder.top() );
+        ascendingOrder.pop();
+        this->current = descendingOrder.top();
 
-        Iterator<T>& operator=(const Iterator<T> &other) {          
-            // TODO
-        }
+        return (*this);
+    }
 
-        bool operator!=(Iterator<T> other) {
-            // TODO
+    Iterator<T> operator--() {
+        if(descendingOrder.empty())
+        {
+            this->current = nullptr;
+            return (*this);
         }
+        ascendingOrder.push(descendingOrder.top());
+        descendingOrder.pop();
+        this->current = ascendingOrder.top();
+        return (*this);
+    }
 
-        Iterator<T>& operator++() {
-            // TODO
-        }
-
-        Iterator<T>& operator--() {
-            // TODO
-        }
-
-        T operator*() {
-            // TODO
-        }
+    T operator*() {
+        if(!this->current) throw out_of_range("Empty list!");
+        return this->current->data;
+    }
 };
 
 #endif

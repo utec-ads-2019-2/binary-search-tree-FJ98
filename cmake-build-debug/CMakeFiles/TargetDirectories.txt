@@ -1,0 +1,3 @@
+/home/felix/ADS-20192/binary-search-tree-FJ98/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/felix/ADS-20192/binary-search-tree-FJ98/cmake-build-debug/CMakeFiles/binary_search_tree_FJ98.dir
+/home/felix/ADS-20192/binary-search-tree-FJ98/cmake-build-debug/CMakeFiles/edit_cache.dir
