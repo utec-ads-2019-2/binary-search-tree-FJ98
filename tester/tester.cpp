@@ -20,18 +20,20 @@ void Tester::testBSFTree(Mocker mocker, vector<T> elements) {
 
     sortAndPrune(elements);
 
-    ASSERT(elements.size() == test->size(), "There is a problem with the insert or size");
+    ASSERT(elements.size() == test->size(), "There is a problem with the insert or privateSize");
 
-//    unsigned int toRemove = mocker.generateRandomInt(1, elements.size());
-//    for (int j = 0; j < static_cast<int>(toRemove); ++j) {
-//        unsigned int index = mocker.generateRandomInt(0, elements.size() - 1);
-//        T temp = elements.at(index);
-//        elements.erase(elements.begin() + index);
-//        test->remove(temp);
-//        ASSERT(!test->find(temp), "There is a problem with the remove or find");
-//    }
+    unsigned int toRemove = mocker.generateRandomInt(1, elements.size());
 
-    ASSERT(elements.size() == test->size(), "There is a problem with the remove or size");
+    for (int j = 0; j < static_cast<int>(toRemove); ++j) {
+        unsigned int index = mocker.generateRandomInt(0, elements.size() - 1);
+        T temp = elements.at(index);
+        elements.erase(elements.begin() + index);
+        test->remove(temp);
+        int duplicates = count(elements.begin(), elements.end(), temp);
+        ASSERT(test->find(temp) == (duplicates > 0), "There is a problem with the remove or find");
+    }
+
+    ASSERT(elements.size() == test->size(), "There is a problem with the remove or privateSize");
 
     auto it = test->begin();
     for (int j = 0; j < elements.size() && it != test->end(); ++j) {
@@ -51,3 +53,18 @@ void Tester::sortAndPrune(vector<T>& array) {
 //    auto last = unique(array.begin(), array.end());
 //    array.erase(last, array.end());
 }
+
+
+
+
+// EL PROFE DIJO QUE CAMBIARAMOS ESTO DENTRO DEL TESTER PORQUE NUESTRO BST ACEPTA REPETIDOS
+// NO REPEATED ELEMENTS
+//    unsigned int toRemove = mocker.generateRandomInt(1, elements.privateSize());
+//    for (int j = 0; j < static_cast<int>(toRemove); ++j) {
+//        unsigned int index = mocker.generateRandomInt(0, elements.privateSize() - 1);
+//        T temp = elements.at(index);
+//        elements.erase(elements.begin() + index);
+//        test->remove(temp);
+//        ASSERT(!test->find(temp), "There is a problem with the remove or find");
+//    }
+// NO REPEATED ELEMENTS

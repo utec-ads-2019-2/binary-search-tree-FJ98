@@ -1,6 +1,6 @@
 #include <iostream>
 #include "tester/tester.h"
-
+#include <list>
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -9,39 +9,29 @@ int main(int argc, char *argv[]) {
     cout << "===========================================================" << endl << endl;
 
     Tester::execute();
-
-//    BSTree<int> bsTree;
+//    int removeElement = 15;
+//    std::list<int> testList = {0, 1, 2, 2, 2, 3, 10, 13, 15, 15, 17, 18, 20, 21, 22, 24, 28, 28, 30, 31, 32, 41,
+//                               41, 42, 43, 44, 47, 49, 51, 52, 52, 58, 62, 63, 64, 64, 65, 66, 71, 72, 74, 75, 76,
+//                               76, 76, 80, 81, 82, 83, 95, 99, 99 };
 //
-//    bsTree.insert(100);
-//    bsTree.insert(150);
-//    bsTree.insert(120);
-//    bsTree.insert(130);
-//    bsTree.insert(140);
-//    bsTree.insert(6);
-//    bsTree.insert(20);
-//    bsTree.insert(4);
-//    bsTree.insert(5);
-//    bsTree.insert(3);
-//    bsTree.insert(2);
-//    bsTree.insert(1);
-//    bsTree.insert(25);
-//    bsTree.insert(30);
+//    cout << "List before delete: \n";
+//    for (auto && item: testList) {cout << item << " "; } std::cout << std::endl;
 //
-//    cout << bsTree.height() << endl;
-//    bsTree.traversePreOrder(); std::cout << std::endl;
-//    std::cout << bsTree.size() << std::endl;
-//    bsTree.remove(30);
-//    bsTree.traversePreOrder(); std::cout << std::endl;
-//    std::cout << bsTree.size() << std::endl;
-
-//    std::cout << bsTree.find(20) << std::endl;
-
+//    BSTree<int> bTree;
+//    for (int i : testList) { bTree.insert(i); }
+//    cout << "Tree before delete: \n"; bTree.privateTraverseInOrder();
+//    std::cout << std::endl << std::endl;
 //
-//    bsTree.insert(5);
-//    bsTree.insert(7);
-//    bsTree.insert(15);
-
-
+//    testList.remove(removeElement);
+//    cout << "List after delete: \n";
+//    for (auto && item: testList) {cout << item << " "; }
+//    std::cout << std::endl << std::endl;
+//
+//    std::cout << removeElement << " was removed from the tree?: " << std::boolalpha << bTree.remove(removeElement) << "\n";
+//    cout << "Tree after delete: \n";
+//    bTree.privateTraverseInOrder(); std::cout << std::endl;
+//
+//    std::cout  << removeElement << " was founded in the tree?: " << std::boolalpha << bTree.find(removeElement) << "\n";
 
 
     return EXIT_SUCCESS;

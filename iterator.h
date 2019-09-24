@@ -9,33 +9,36 @@ template <typename T>
 class Iterator {
     private:
     Node<T> *current;
-    stack<Node<T>*> descendingOrder;
-    stack<Node<T>*> ascendingOrder;
-    deque<Node<T>*> inOrder;
+
+    /* My code begins */
+    stack<Node<T>*> descendingOrderStack;
+    stack<Node<T>*> ascendingOrderStack;
+    /* My code ends */
+
     public:
     Iterator() { this->current = nullptr; }
 
-    void nextInOrder(Node<T> *node){
-        // LIKE traverseInOrder, same idea.
+    void insertInOrderToStack(Node<T> *node){
+        // LIKE privateTraverseInOrder(), same idea.
         if (!node) return;
-        nextInOrder(node->left);
-        descendingOrder.push(node);
-        nextInOrder(node->right);
+        insertInOrderToStack(node->left);
+        descendingOrderStack.push(node);
+        insertInOrderToStack(node->right);
     }
 
 
     explicit Iterator(Node<T> *node) {
-        nextInOrder(node);
+        insertInOrderToStack(node);
         // Using another stack to set the initial position of begin() iterator
-        while ( !descendingOrder.empty() )
+        while ( !descendingOrderStack.empty() )
         {
-            ascendingOrder.push(descendingOrder.top() );
-            descendingOrder.pop();
+            ascendingOrderStack.push(descendingOrderStack.top() );
+            descendingOrderStack.pop();
         }
-        descendingOrder.push(ascendingOrder.top() );
-        ascendingOrder.pop();
+        descendingOrderStack.push(ascendingOrderStack.top() );
+        ascendingOrderStack.pop();
 
-        this->current = descendingOrder.top(); //setting the initial position of begin() iterator
+        this->current = descendingOrderStack.top(); //setting the initial position of begin() iterator
     }
 
     Iterator<T>& operator=(const Iterator<T> &other) {
@@ -48,28 +51,28 @@ class Iterator {
     }
 
     Iterator<T> operator++() {
-        if ( ascendingOrder.empty() )
+        if ( ascendingOrderStack.empty() )
         {
             this->current = nullptr;
             return (*this);
         }
 
-        descendingOrder.push(ascendingOrder.top() );
-        ascendingOrder.pop();
-        this->current = descendingOrder.top();
+        descendingOrderStack.push(ascendingOrderStack.top() );
+        ascendingOrderStack.pop();
+        this->current = descendingOrderStack.top();
 
         return (*this);
     }
 
     Iterator<T> operator--() {
-        if(descendingOrder.empty())
+        if(descendingOrderStack.empty())
         {
             this->current = nullptr;
             return (*this);
         }
-        ascendingOrder.push(descendingOrder.top());
-        descendingOrder.pop();
-        this->current = ascendingOrder.top();
+        ascendingOrderStack.push(descendingOrderStack.top());
+        descendingOrderStack.pop();
+        this->current = ascendingOrderStack.top();
         return (*this);
     }
 

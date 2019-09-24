@@ -11,10 +11,6 @@ node.h
 /home/felix/ADS-20192/binary-search-tree-FJ98/node.h
 iterator.h
 /home/felix/ADS-20192/binary-search-tree-FJ98/iterator.h
-stack
--
-queue
--
 
 /home/felix/ADS-20192/binary-search-tree-FJ98/iterator.h
 node.h
@@ -31,6 +27,8 @@ iostream
 -
 tester/tester.h
 /home/felix/ADS-20192/binary-search-tree-FJ98/tester/tester.h
+list
+-
 
 /home/felix/ADS-20192/binary-search-tree-FJ98/mocker/mocker.h
 random

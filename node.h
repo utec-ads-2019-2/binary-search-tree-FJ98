@@ -12,8 +12,8 @@ class Node {
     T data;
     Node<T> *left;
     Node<T> *right;
-
-    explicit Node(T _data): data{_data}, left{nullptr}, right{nullptr} {}
+    Node<T> *parent;
+    explicit Node(T _data): data{_data}, left{nullptr}, right{nullptr}, parent{nullptr} {}
 
     template<class>
     friend class BSTree; 
