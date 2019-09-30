@@ -8,6 +8,7 @@ template <typename T>
 class  BSTree {
     Node<T> *root;
 
+    // No es buena idea usar private como nombre
     bool privateFind(T data, Node<T>* cur)
     {
         if (!cur) { return false; }
